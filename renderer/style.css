@@ -1,0 +1,190 @@
+@font-face {
+  font-family: 'Pixel';
+  src: url('../node_modules/@fontsource/press-start-2p/files/press-start-2p-latin-400-normal.woff2') format('woff2');
+  font-display: block;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+  font-family: 'Pixel', 'Courier New', monospace;
+  color: #f6e9d2;
+}
+
+#app {
+  position: relative;
+  width: 272px;
+  height: 356px;
+  padding: 10px;
+  -webkit-app-region: drag; /* drag the avocado anywhere on the desktop */
+}
+
+button, input { font-family: inherit; color: inherit; -webkit-app-region: no-drag; }
+button { background: none; border: none; cursor: pointer; }
+
+/* ---------- window buttons ---------- */
+.winbtns, .skinbtns {
+  position: absolute;
+  top: 6px;
+  display: flex;
+  gap: 4px;
+  z-index: 5;
+  -webkit-app-region: no-drag;
+}
+.winbtns { right: 6px; }
+.skinbtns { left: 6px; }
+
+#skinName {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  text-align: center;
+  font-size: 8px;
+  color: #fff7e0;
+  text-shadow: 2px 2px 0 #000;
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+  z-index: 5;
+}
+#skinName.show { opacity: 1; }
+
+.winbtns button, .skinbtns button {
+  width: 20px;
+  height: 20px;
+  font-size: 8px;
+  line-height: 20px;
+  background: #23402b;
+  color: #b5d94a;
+  opacity: 0.55;
+}
+.winbtns button:hover, .skinbtns button:hover { opacity: 1; }
+.winbtns #close:hover { background: #a8323e; color: #fff; }
+.winbtns #pin.on { color: #f3f08c; opacity: 0.9; }
+
+/* ---------- avocado ---------- */
+#avocado {
+  position: relative;
+  width: 252px;
+  height: 336px;
+}
+#sprite {
+  display: block;
+  image-rendering: pixelated;
+}
+#avocado.running { animation: bob 1.6s steps(2) infinite; }
+#avocado.done { animation: hop 0.5s steps(4) 4; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+@keyframes hop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ---------- the pit (timer face) ---------- */
+#pit {
+  position: absolute;
+  left: 70px;   /* pit centre (126, 220.5) minus half of 112 */
+  top: 164px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.timeRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 24px;
+}
+#time {
+  width: 70px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  outline: none;
+  text-align: center;
+  font-size: 22px;
+  line-height: 24px;
+  color: #fff7e0;
+  text-shadow: 2px 2px 0 #2a130a;
+  user-select: text;
+  cursor: text;
+}
+#time:focus { border-bottom-color: #e0b98a; }
+#time:read-only { cursor: default; }
+#pit.ticking #time { width: 90px; font-size: 15px; }
+#pit.ticking .adj { display: none; }
+
+/* ---------- resize grip ---------- */
+#grip {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  opacity: 0.45;
+  z-index: 6;
+  -webkit-app-region: no-drag;
+  background:
+    linear-gradient(135deg, transparent 0 55%, #b5d94a 55% 65%, transparent 65% 75%, #b5d94a 75% 85%, transparent 85%);
+}
+#grip:hover, #grip.dragging { opacity: 1; }
+
+.adj {
+  width: 14px;
+  height: 14px;
+  font-size: 9px;
+  line-height: 14px;
+  color: #e0b98a;
+  visibility: hidden;
+}
+#pit.fresh:hover .adj { visibility: visible; }
+.adj:hover { color: #fff; }
+
+#mode {
+  font-size: 6px;
+  letter-spacing: 1px;
+  color: #e0b98a;
+}
+#mode:hover:not(:disabled) { color: #fff; }
+#mode:disabled { cursor: default; }
+
+#task {
+  width: 84px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  outline: none;
+  text-align: center;
+  font-size: 7px;
+  line-height: 12px;
+  color: #f6e9d2;
+  user-select: text;
+}
+#task::placeholder { color: #b98a63; }
+#task:focus { border-bottom-color: #b98a63; }
+
+.ctrlRow { display: flex; align-items: center; gap: 6px; }
+#toggle { font-size: 7px; color: #fff7e0; padding: 2px; }
+#toggle:hover { color: #f2a03d; }
+#reset { font-size: 10px; line-height: 10px; color: #e0b98a; font-family: 'Segoe UI Symbol', sans-serif; }
+#reset:hover { color: #fff; }

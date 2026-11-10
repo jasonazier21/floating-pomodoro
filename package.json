@@ -1,0 +1,15 @@
+{
+  "name": "avocado-pomodoro",
+  "version": "1.0.0",
+  "description": "A pixel-art avocado pomodoro timer for the desktop",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@fontsource/press-start-2p": "^5.0.0"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; font-src 'self'">
+  <title>Avocado Pomodoro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="skinbtns">
+      <button id="prevSkin" title="Previous skin">&lt;</button>
+      <button id="nextSkin" title="Next skin">&gt;</button>
+    </div>
+    <div id="skinName"></div>
+    <div id="grip" title="Drag to resize (double-click to reset)"></div>
+
+    <div class="winbtns">
+      <button id="pin" class="on" title="Always on top">^</button>
+      <button id="min" title="Minimize">_</button>
+      <button id="close" title="Close">x</button>
+    </div>
+
+    <div id="avocado">
+      <canvas id="sprite" width="252" height="336"></canvas>
+
+      <div id="pit">
+        <div class="timeRow">
+          <button id="minus" class="adj" title="Less time">-</button>
+          <input id="time" type="text" inputmode="numeric" maxlength="3" value="25" spellcheck="false" title="Type minutes (1-120)">
+          <button id="plus" class="adj" title="More time">+</button>
+        </div>
+        <button id="mode" title="Click to switch mode">FOCUS MIN</button>
+        <input id="task" type="text" maxlength="40" placeholder="(task)" spellcheck="false">
+        <div class="ctrlRow">
+          <button id="toggle">&#9656; START</button>
+          <button id="reset" title="Reset">&#8634;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="skins.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
